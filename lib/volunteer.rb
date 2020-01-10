@@ -40,13 +40,13 @@ class Volunteer
     end
   end
 
-def update(name)
-  @name = name
-  DB.exec("UPDATE volunteers SET name = '#{@name}' WHERE id = #{@id};")
-end
+  def update(name)
+    @name = name
+    DB.exec("UPDATE volunteers SET name = '#{@name}' WHERE id = #{@id};")
+  end
 
-# def delete
-#   DB.exec("DELETE FROM cities WHERE id = #{@id};")
-#   DB.exec("DELETE FROM stops WHERE city_id = #{@id};") # new code
-# end
+  def delete
+    DB.exec("DELETE FROM volunteers WHERE id = #{@id};")
+    # DB.exec("DELETE FROM projects WHERE city_id = #{@id};") # new code
+  end
 end
