@@ -61,7 +61,7 @@ describe Volunteer do
       volunteer2 = Volunteer.new({:name => 'Joe', :project_id => 1, :id => nil})
       volunteer2.save
       volunteer1.update('Daddy')
-      expect(volunteer1.name).to eq 'Ddy'
+      expect(volunteer1.name).to eq 'Daddy'
     end
   end
 end
