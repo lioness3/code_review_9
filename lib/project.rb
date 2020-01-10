@@ -17,8 +17,7 @@ def self.all
   returned_projects.each() do |person|
     title = person.fetch("title")
     id = person.fetch("id").to_i
-    project_id = person.fetch("project_id").to_i
-    projects.push(Volunteer.new({:title => title, :id => id}))
+    projects.push(Project.new({:title => title, :id => id}))
   end
   projects
 end
