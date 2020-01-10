@@ -15,5 +15,8 @@ def self.all
   end
   volunteers
 end
+def ==(volunteer_to_compare)
+  self.name() == volunteer_to_compare.name()
+end
 
 end
