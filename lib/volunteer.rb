@@ -20,11 +20,11 @@ class Volunteer
   end
 
   def ==(volunteer_to_compare)
-    self.name() == volunteer_to_compare.name()
+    (self.name() == volunteer_to_compare.name()) && (self.project_id() == volunteer_to_compare.project_id())
   end
 
   def save
-    result = DB.exec("INSERT INTO volunteers (name) VALUES ('#{@name}') RETURNING id;")
+    result = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', #{@project_id}) RETURNING id;")
     @id =result.first().fetch("id").to_i
   end
 
@@ -48,5 +48,16 @@ class Volunteer
   def delete
     DB.exec("DELETE FROM volunteers WHERE id = #{@id};")
     # DB.exec("DELETE FROM projects WHERE city_id = #{@id};") # new code
+  end
+
+  def self.find_by_project(p_id)
+    volunteers = []
+    returned_volunteers = DB.exec("SELECT * FROM volunteers WHERE project_id = #{p_id};")
+    returned_volunteers.each() do |volunteer|
+      name = volunteer.fetch("name")
+      id = volunteer.fetch("id").to_i
+      volunteers.push(Volunteer.new({:name => name, :project_id => p_id, :id => id}))
+    end
+    volunteers
   end
 end
