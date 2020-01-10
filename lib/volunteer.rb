@@ -11,12 +11,16 @@ def self.all
   returned_volunteers.each() do |person|
     name = person.fetch("name")
     id = person.fetch("id").to_i
-    volunteers.push(Volunteer.new({:name => name, :id => id}))
+    project_id = person.fetch("project_id").to_i
+    volunteers.push(Volunteer.new({:name => name,:project_id => project_id, :id => id}))
   end
   volunteers
 end
 def ==(volunteer_to_compare)
   self.name() == volunteer_to_compare.name()
 end
-
+def save
+    result = DB.exec("INSERT INTO volunteers (name) VALUES ('#{@name}') RETURNING id;")
+    @id =result.first().fetch("id").to_i
+  end
 end
