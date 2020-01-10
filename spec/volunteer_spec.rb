@@ -71,7 +71,7 @@ describe Volunteer do
       volunteer2 = Volunteer.new({:name => 'Joe', :project_id => 1, :id => nil})
       volunteer2.save
       volunteer1.delete()
-      expect(Volunteer.all) .to eq [volunteer1, volunteer2]
+      expect(Volunteer.all) .to eq [volunteer2]
     end
   end
 end
