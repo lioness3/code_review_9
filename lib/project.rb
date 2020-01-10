@@ -41,14 +41,15 @@ class Project
     Volunteer.find_by_project(self.id)
   end
 
-
   def update(attributes)
-
     @title = attributes.fetch(:title)
-
     DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
   end
 
+  def delete
+    DB.exec("DELETE FROM projects WHERE id = #{@id};")
+    DB.exec("DELETE FROM volunteers WHERE project_id = #{@id};") 
+  end
 end
 
 # if (attributes.has_key?(:album_name)) && (attributes.fetch(:album_name) != nil)
