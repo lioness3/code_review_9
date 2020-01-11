@@ -1,0 +1,21 @@
+<% if @projects.any? %>
+<% @projects.each do |project| %>
+<ul>
+  <li><h3><%= project.title %></h3></li>
+</ul>
+  <% end %>
+ <input type="text" name="name" placeholder = "ENTER A VOLUNTEER NAME">
+<% end %>
+<form class="" action="/home/project" method="post">
+<input type="text" name="title" >
+<button type="submit" name="button">Create Project</button>
+</form>
+
+
+<form class="" action="/home/volunteer" method="post">
+
+
+   <input type="text" name="name" placeholder = "ENTER A VOLUNTEER NAME">
+
+
+</form>
