@@ -14,9 +14,9 @@ class Project
   def self.all
     returned_projects = DB.exec("SELECT * FROM projects;")
     projects = []
-    returned_projects.each() do |person|
-      title = person.fetch("title")
-      id = person.fetch("id").to_i
+    returned_projects.each() do |project|
+      title = project.fetch("title")
+      id = project.fetch("id").to_i
       projects.push(Project.new({:title => title, :id => id}))
     end
     projects
@@ -40,33 +40,24 @@ class Project
   def volunteers
     Volunteer.find_by_project(self.id)
   end
-
-  def update(attributes)
-    if (attributes.has_key?(:title)) && (attributes.fetch(:title) != nil)
-      @title = attributes.fetch(:title)
-      DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+  def update(title)
+    @title = title
+    DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+  end
+  # def update(attributes)
+  #   if (attributes.has_key?(:title)) && (attributes.fetch(:title) != nil)
+  #     @title = attributes.fetch(:title)
+  #     DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
   #   elsif (attributes.has_key?(:project_name)) && (attributes.fetch(:project_name) != nil)
   #     project_name = attributes.fetch(:project_name)
   #     project = DB.exec("SELECT * FROM projects WHERE lower(title)='#{project_name.downcase}';").first
   #   if project != nil
   #     DB.exec("INSERT INTO projects_volunteers (project_id, volunteer_id) VALUES (#{project['id'].to_i}, #{@id});")
   #   end
-  # end
-end
+#   end
+# end
 
   def delete
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
-    DB.exec("DELETE FROM volunteers WHERE project_id = #{@id};")
-    DB.exec("DELETE FROM projects_volunteers WHERE project_id = #{@id};")
   end
 end
-
-
-
-# def ==(project_to_compare)
-#   if song_to_compare != nil
-#     (self.name() == song_to_compare.name()) && (self.album_id() == song_to_compare.album_id())
-#   else
-#     false
-#   end
-# end
