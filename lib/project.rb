@@ -42,25 +42,28 @@ class Project
   end
 
   def update(attributes)
-    @title = attributes.fetch(:title)
-    DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
-  end
+    if (attributes.has_key?(:title)) && (attributes.fetch(:title) != nil)
+      @title = attributes.fetch(:title)
+      DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+  #   elsif (attributes.has_key?(:project_name)) && (attributes.fetch(:project_name) != nil)
+  #     project_name = attributes.fetch(:project_name)
+  #     project = DB.exec("SELECT * FROM projects WHERE lower(title)='#{project_name.downcase}';").first
+  #   if project != nil
+  #     DB.exec("INSERT INTO projects_volunteers (project_id, volunteer_id) VALUES (#{project['id'].to_i}, #{@id});")
+  #   end
+  # end
+end
 
   def delete
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
-    DB.exec("DELETE FROM volunteers WHERE project_id = #{@id};") 
+    DB.exec("DELETE FROM volunteers WHERE project_id = #{@id};")
+    DB.exec("DELETE FROM projects_volunteers WHERE project_id = #{@id};")
   end
 end
 
-# if (attributes.has_key?(:album_name)) && (attributes.fetch(:album_name) != nil)
-#     album_name = attributes.fetch(:album_name)
-#     album = DB.exec("SELECT * FROM albums WHERE lower(name)='#{album_name.downcase}';").first
-#     if album != nil
-#       DB.exec("INSERT INTO albums_artists (album_id, artist_id) VALUES (#{album['id'].to_i}, #{@id});")
-#     end
-#   end
 
-# def ==(song_to_compare)
+
+# def ==(project_to_compare)
 #   if song_to_compare != nil
 #     (self.name() == song_to_compare.name()) && (self.album_id() == song_to_compare.album_id())
 #   else
