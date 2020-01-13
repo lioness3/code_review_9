@@ -33,8 +33,6 @@ post '/projects/add' do
 end
 get '/projects/:id' do
   @project = Project.find(params[:id].to_i())
-  @projects = Project.all
-  @volunteers = Volunteer.all
    erb(:project)
 end
 post '/projects/:id' do
@@ -49,14 +47,14 @@ get '/projects/:id/edit' do
   @volunteers = Volunteer.all
   erb(:edit_project)
 end
-post '/projects/:id/edit' do
+post '/projects/:id/update' do
   @project = Project.find(params[:id].to_i())
   @project.update(params[:title])
   @projects = Project.all
   @volunteers = Volunteer.all
   erb(:projects)
 end
-patch '/projects/:id/edit' do
+patch '/projects/:id/update' do
   @project = Project.find(params[:id].to_i())
   @project.update(params[:title])
   @projects = Project.all
