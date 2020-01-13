@@ -1,5 +1,5 @@
 class Project
-  attr_accessor :id, :title
+  attr_accessor :title, :id
 
   def initialize(attributes)
     @title = attributes.fetch(:title)
@@ -45,8 +45,8 @@ class Project
     if (attributes.has_key?(:title)) && (attributes.fetch(:title) != nil)
       @title = attributes.fetch(:title)
       DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+    end
   end
-end
 
   def delete
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
