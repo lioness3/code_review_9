@@ -1,6 +1,6 @@
  <h1>Edit : <%= @volunteer.name %></h1>
 
- <form class="/projects/:id/volunteers" action="index.html" method="post">
+ <form  action='/projects/<%= @volunteer.project.id %>/volunteers' method="post">
 <input type="hidden"   name="_method" value="patch">
 <label for="name">EDIT VOLUNTEER:</label>
 <input type="text" name="name">
