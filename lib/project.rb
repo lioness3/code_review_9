@@ -29,8 +29,8 @@ class Project
   def self.find(id)
     project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
     if project
-      title = project.fetch("title")
-      id = project.fetch("id").to_i
+      title = project.fetch('title')
+      id = project.fetch('id').to_i
       Project.new({:title => title, :id => id})
     else
       nil
@@ -42,11 +42,10 @@ class Project
   end
 
   def update(attributes)
-    if (attributes.has_key?(:title)) && (attributes.fetch(:title) != nil)
-      @title = attributes.fetch(:title)
+    @title = attributes.fetch(:title)
+
       DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
     end
-  end
 
   def delete
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
