@@ -47,22 +47,17 @@ get '/projects/:id/edit' do
   @project = Project.find(params[:id].to_i())
   erb(:edit_project)
 end
-#
-# get '/projects/:id/update' do
-#   @project = Project.find(params[:id].to_i())
-#   erb(:projects)
-# end
-#
-# post '/projects/:id/update' do
-#   @project = Project.find(params[:id].to_i())
-#   @project.update(params[:title])
-#   @projects = Project.all
-#   erb(:projects)
-# end
 
 patch '/projects/:id' do
   @project = Project.find(params[:id].to_i())
   @project.update(:title => params[:title])
+  @projects = Project.all
+  erb(:project)
+end
+
+delete '/projects/:id' do
+  @project = Project.find(params[:id].to_i())
+  @project.delete
   @projects = Project.all
   erb(:project)
 end
