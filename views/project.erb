@@ -10,7 +10,7 @@
 <p>There are no volunteers at this time. Add one below.</p>
 <% end %>
 <form action="/projects/<%= @project.id %>/volunteers" method="post">
-
-   <input type="text" name="name" placeholder = "ENTER A VOLUNTEER NAME">
+<label for="name">Add a volunteer name:</label>
+   <input type="text" name="name" >
 <button type="submit" name="button">ADD VOLUNTEER</button>
 </form>
