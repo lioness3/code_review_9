@@ -1,5 +1,7 @@
 <%= @project.title %>
+
 <a href="/projects/<%= @project.id %>/edit"> Edit Project </a>
+
 <% if @project.volunteers.any? %>
 <% @project.volunteers.each do |volunteer| %>
 <ul>
@@ -9,8 +11,11 @@
 <% else %>
 <p>There are no volunteers at this time. Add one below.</p>
 <% end %>
+
 <form action="/projects/<%= @project.id %>/volunteers" method="post">
+
 <label for="name">Add a volunteer name:</label>
    <input type="text" name="name" >
+   
 <button type="submit" name="button">ADD VOLUNTEER</button>
 </form>

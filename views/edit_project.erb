@@ -1,13 +1,17 @@
 <form  action="/projects/<%= @project.id %>" method="post">
   <input type="hidden"   name="_method" value="patch">
+
   <label for="title">
   Edit:</label>
 <input type="text" name="title">
+
 <button type="submit" name="button">Update Project</button>
 </form>
+
 <form action="/projects/<%= @project.id %>" method="post">
   <input name="_method" type="hidden" value="delete">
 
   <button type="submit">Delete Project</button>
 </form>
+
 <p><a href="/projects">Return to Project list</a></p>
